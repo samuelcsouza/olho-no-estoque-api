@@ -1,5 +1,5 @@
-greenlet==0.4.13
-hpy==0.0.4
-pip-chill==1.0.3
-readline==6.2.4.1
-socketify==0.0.27
+fastapi
+flake8
+pip-chill
+python-dotenv
+uvicorn

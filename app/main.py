@@ -1,10 +1,8 @@
-from config.socketify import app
-import routes  # noqa
+from fastapi import FastAPI
+from app.routes import endpoint_router
 
 
-app.listen(
-    3000,
-    lambda config: print(f"Listening on port {config.port}")
-)
+app = FastAPI()
 
-app.run()
+
+app.include_router(endpoint_router)
