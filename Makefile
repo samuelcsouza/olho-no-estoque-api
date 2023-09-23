@@ -3,3 +3,6 @@ run-local:
 	docker-compose -f docker-compose-db.yml stop
 	docker-compose -f docker-compose-db.yml build --force-rm
 	docker-compose -f docker-compose-db.yml up
+
+run-api:
+	uvicorn app.main:app --reload
