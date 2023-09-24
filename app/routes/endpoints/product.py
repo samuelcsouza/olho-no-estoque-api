@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Query
 from typing import Dict
 from app.dependencies import get_service
+from app.schemas.product import Product
 from app.services.product import ProductService
 
 
@@ -21,3 +22,14 @@ def list(
         "limit": limit,
         "data": list
     }
+
+
+@router.post("/new", status_code=201)
+def create_product(
+    product: Product,
+    service: ProductService = Depends(get_service(ProductService)),
+) -> Product:
+
+    new = service.create(product)
+
+    return new
