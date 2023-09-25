@@ -69,15 +69,15 @@ class ProductRepository:
         except Exception as e:
             raise Exception(f"Could not update product: {e}")
 
-        return new_product_dict
+        return self.get(id)
 
     def create(self, product: Product) -> Product:
 
         product_dict = product.__dict__
 
         try:
-            self._product_collection.insert_one(product_dict)
+            new_product = self._product_collection.insert_one(product_dict)
         except Exception as e:
             raise Exception(f"Could not create product: {e}")
 
-        return product
+        return self.get(new_product.inserted_id)
