@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Query
 from typing import Dict
 from app.dependencies import get_service
-from app.schemas.product import Product
+from app.schemas.product import DeletedProduct, Product
 from app.services.product import ProductService
 
 
@@ -45,3 +45,14 @@ def update_product(
     updated_product = service.edit(product, id)
 
     return updated_product
+
+
+@router.delete("/delete/{id}")
+def delete_product(
+    id: str,
+    service: ProductService = Depends(get_service(ProductService)),
+) -> DeletedProduct:
+
+    has_success = service.delete(id)
+
+    return DeletedProduct(success=has_success)

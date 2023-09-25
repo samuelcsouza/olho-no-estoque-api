@@ -41,7 +41,14 @@ class ProductRepository:
         return _product
 
     def delete(self, product_id: str) -> bool:
-        pass
+        try:
+            self._product_collection.delete_one(
+                {"_id": ObjectId(product_id)}
+            )
+        except Exception as e:
+            raise Exception(f"Could not delete product: {e}")
+
+        return True
 
     def edit(self, product: Product, id: str) -> Product:
         new_product_dict = product.__dict__

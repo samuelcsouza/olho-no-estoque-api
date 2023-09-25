@@ -13,8 +13,8 @@ class ProductService:
     def get(self):
         pass
 
-    def delete(self):
-        pass
+    def delete(self, id: str) -> bool:
+        return self._product_repository.delete(id)
 
     def edit(self, product: Product, id: str) -> Product:
         return self._product_repository.edit(product, id)
