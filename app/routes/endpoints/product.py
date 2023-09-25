@@ -15,7 +15,7 @@ def list(
     service: ProductService = Depends(get_service(ProductService)),
 ) -> Dict:
 
-    list = service.list()
+    list = service.list(skip, limit)
 
     return {
         "skip": skip,

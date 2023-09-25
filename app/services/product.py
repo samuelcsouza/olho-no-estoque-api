@@ -1,3 +1,4 @@
+from typing import List
 from app.repositories.product import ProductRepository
 from app.schemas.product import Product
 from fastapi.exceptions import HTTPException
@@ -7,8 +8,8 @@ class ProductService:
     def __init__(self, product_repository: ProductRepository) -> None:
         self._product_repository = product_repository
 
-    def list(self):
-        docs = self._product_repository.list()
+    def list(self, skip: int, limit: int) -> List[Product]:
+        docs = self._product_repository.list(skip, limit)
         return docs
 
     def get(self, id: str) -> Product:

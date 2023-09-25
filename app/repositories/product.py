@@ -1,3 +1,4 @@
+from typing import List
 from pymongo.database import Database
 from bson import errors, ObjectId
 from app.schemas.product import Product
@@ -15,10 +16,12 @@ class ProductRepository:
 
         return Product(**product)
 
-    def list(self):
+    def list(self, skip: int = 0, limit: int = 10) -> List[Product]:
 
         all_products = list()
-        documents = self._product_collection.find({})
+        documents = self._product_collection.find()\
+            .skip(skip)\
+            .limit(limit)
 
         for document in list(documents):
             all_products.append(
