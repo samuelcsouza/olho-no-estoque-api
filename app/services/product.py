@@ -1,5 +1,6 @@
 from app.repositories.product import ProductRepository
 from app.schemas.product import Product
+from fastapi.exceptions import HTTPException
 
 
 class ProductService:
@@ -10,8 +11,16 @@ class ProductService:
         docs = self._product_repository.list()
         return docs
 
-    def get(self):
-        pass
+    def get(self, id: str) -> Product:
+        try:
+            _product = self._product_repository.get(id)
+        except Exception as e:
+            raise HTTPException(
+                status_code=404,
+                detail=str(e)
+            )
+
+        return _product
 
     def delete(self, id: str) -> bool:
         return self._product_repository.delete(id)

@@ -35,8 +35,13 @@ class ProductRepository:
             )
         except errors.InvalidId:
             raise Exception("The Id entered is not a valid ObjectId.")
+        except Exception as e:
+            raise Exception(f"Could not get product: {e}")
 
-        _product = self._create_product_from_mongo(_product)
+        if _product:
+            _product = self._create_product_from_mongo(_product)
+        else:
+            raise Exception(f"Product {product_id} not found!")
 
         return _product
 

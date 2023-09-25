@@ -56,3 +56,14 @@ def delete_product(
     has_success = service.delete(id)
 
     return DeletedProduct(success=has_success)
+
+
+@router.get("/{id}")
+def get_product(
+    id: str,
+    service: ProductService = Depends(get_service(ProductService)),
+) -> Product:
+
+    product = service.get(id)
+
+    return product
