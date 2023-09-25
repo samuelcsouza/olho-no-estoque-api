@@ -1,4 +1,5 @@
 from app.repositories.product import ProductRepository
+from app.schemas.product import Product
 
 
 class ProductService:
@@ -15,8 +16,8 @@ class ProductService:
     def delete(self):
         pass
 
-    def edit(self):
-        pass
+    def edit(self, product: Product, id: str) -> Product:
+        return self._product_repository.edit(product, id)
 
-    def create(self, product):
+    def create(self, product) -> Product:
         return self._product_repository.create(product)

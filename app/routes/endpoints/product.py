@@ -33,3 +33,15 @@ def create_product(
     new = service.create(product)
 
     return new
+
+
+@router.patch("/edit/{id}")
+def update_product(
+    id: str,
+    product: Product,
+    service: ProductService = Depends(get_service(ProductService)),
+) -> Product:
+
+    updated_product = service.edit(product, id)
+
+    return updated_product

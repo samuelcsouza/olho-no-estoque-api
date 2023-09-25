@@ -43,8 +43,18 @@ class ProductRepository:
     def delete(self, product_id: str) -> bool:
         pass
 
-    def edit(self, product_id: str) -> Product:
-        pass
+    def edit(self, product: Product, id: str) -> Product:
+        new_product_dict = product.__dict__
+
+        try:
+            self._product_collection.update_one(
+                {"_id": ObjectId(id)},
+                {"$set": new_product_dict}
+            )
+        except Exception as e:
+            raise Exception(f"Could not update product: {e}")
+
+        return new_product_dict
 
     def create(self, product: Product) -> Product:
 
