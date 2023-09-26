@@ -6,8 +6,8 @@ class Product(BaseModel):
     id: Optional[str] = None
     material: Optional[str] = None
     treatment: Optional[str] = None
-    spherical: Optional[int] = None
-    cylindrical: Optional[int] = None
+    spherical: Optional[float] = None
+    cylindrical: Optional[float] = None
     brand: Optional[str] = None
 
 
