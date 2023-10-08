@@ -9,6 +9,7 @@ class Product(BaseModel):
     spherical: Optional[float] = None
     cylindrical: Optional[float] = None
     brand: Optional[str] = None
+    value: float = 0
 
 
 class DeletedProduct(BaseModel):
